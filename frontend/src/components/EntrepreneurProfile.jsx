@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const EntrepreneurProfile = () => {
   const { id } = useParams();
   const [entrepreneur, setEntrepreneur] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [startups, setStartups] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchEntrepreneur = async () => {
@@ -16,6 +18,18 @@ const EntrepreneurProfile = () => {
           },
         });
         setEntrepreneur(response.data);
+        
+        // Also fetch any startups associated with this entrepreneur
+        try {
+          const startupsResponse = await axios.get(`http://localhost:5000/api/entrepreneurs/${id}/startups`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+          });
+          setStartups(startupsResponse.data);
+        } catch (err) {
+          console.error('Error fetching startups:', err);
+        }
       } catch (error) {
         console.error('Error fetching entrepreneur details:', error);
       }
@@ -26,27 +40,73 @@ const EntrepreneurProfile = () => {
   }, [id]);
 
   const handleRequestMentor = () => {
-    // Implement the logic to send a mentorship request
-    alert('Mentorship request sent!');
+    // Navigate to messages with this entrepreneur's ID
+    navigate(`/messages?to=${id}`);
+  };
+
+  const handleGoBack = () => {
+    navigate(-1); // Go back to previous page
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="p-4">Loading...</div>;
   }
 
   if (!entrepreneur) {
-    return <div>Error loading entrepreneur details</div>;
+    return <div className="p-4">Error loading entrepreneur details</div>;
   }
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-4">
-      <h2 className="text-2xl font-bold mb-4">{entrepreneur.name}</h2>
-      <p><strong>Bio:</strong> {entrepreneur.profileDetails.bio}</p>
-      <p><strong>Startup:</strong> {entrepreneur.startupDetails?.name || 'N/A'}</p>
-      <img src={entrepreneur.profileDetails.profilePhoto} alt="Profile" className="w-16 h-16 rounded-full" />
-      <button onClick={handleRequestMentor} className="mt-4 bg-blue-500 text-white py-2 px-4 rounded">
-        Request Mentor
+    <div className="container mx-auto p-4">
+      {/* Back button */}
+      <button onClick={handleGoBack} className="mb-4 btn-ghost flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+          <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
+        </svg>
+        Back
       </button>
+      
+      <div className="bg-white shadow-md rounded-lg p-6">
+        <div className="flex items-start">
+          <img 
+            src={entrepreneur.profileDetails.profilePhoto || 'https://via.placeholder.com/150'} 
+            alt="Profile" 
+            className="w-24 h-24 rounded-full mr-6"
+          />
+          <div>
+            <h2 className="text-2xl font-bold mb-2">{entrepreneur.name}</h2>
+            <p className="text-gray-600 mb-1"><strong>Role:</strong> {entrepreneur.role.charAt(0).toUpperCase() + entrepreneur.role.slice(1)}</p>
+            <p className="text-gray-600 mb-4"><strong>Email:</strong> {entrepreneur.email}</p>
+          </div>
+        </div>
+        
+        <div className="mt-6">
+          <h3 className="text-xl font-semibold mb-2">Bio</h3>
+          <p className="text-gray-700">{entrepreneur.profileDetails.bio || 'No bio available'}</p>
+        </div>
+        
+        {startups.length > 0 && (
+          <div className="mt-6">
+            <h3 className="text-xl font-semibold mb-2">Startups</h3>
+            <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
+              {startups.map(startup => (
+                <div key={startup._id} className="border rounded-md p-3 bg-gray-50">
+                  <h4 className="font-bold">{startup.startupName}</h4>
+                  <p className="text-sm text-gray-600">Industry: {startup.industry}</p>
+                  <p className="text-sm text-gray-600">Stage: {startup.stage}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+        
+        <button 
+          onClick={handleRequestMentor} 
+          className="mt-6 btn-primary"
+        >
+          Message Entrepreneur
+        </button>
+      </div>
     </div>
   );
 };

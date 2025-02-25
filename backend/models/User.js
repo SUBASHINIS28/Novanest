@@ -25,6 +25,20 @@ const userSchema = new mongoose.Schema({
     bio: { type: String, default: '' },
     profilePhoto: { type: String, default: '' },
   },
+  notificationPreferences: {
+    messages: {
+      type: Boolean,
+      default: true
+    },
+    profileViews: {
+      type: Boolean,
+      default: true
+    },
+    startupUpdates: {
+      type: Boolean,
+      default: true
+    }
+  },
 });
 
 // Hash the password before saving the user model

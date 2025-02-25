@@ -46,9 +46,23 @@ const EntrepreneurDashboard = () => {
 
   const handleCreateStartup = () => setShowForm(true);
   const handleCloseForm = () => setShowForm(false);
-  const handleSubmit = (formData) => {
-    console.log(formData);
-    handleCloseForm();
+  const handleSubmit = async (formData) => {
+    try {
+      const response = await axios.post('http://localhost:5000/api/startups', formData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      alert('Startup submitted successfully');
+      handleCloseForm();
+      // Refresh the startups list
+      const updatedStartupsResponse = await axios.get(`http://localhost:5000/api/entrepreneurs/${user.id}/startups`);
+      setStartups(updatedStartupsResponse.data);
+    } catch (error) {
+      console.error('Error submitting startup:', error);
+      alert(`Error submitting startup: ${error.response?.data || 'Unknown error'}`);
+    }
   };
 
   const handleUpdateExpertise = async (updatedExpertiseAreas) => {
@@ -81,7 +95,7 @@ const EntrepreneurDashboard = () => {
         onClick={handleCreateStartup}
         className="w-full md:w-auto bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200 shadow-md mb-6"
       >
-        + Add Startup
+        + Post Your Startup
       </button>
 
       <Modal show={showForm} onClose={handleCloseForm}>

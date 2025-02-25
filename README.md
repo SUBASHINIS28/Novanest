@@ -1,8 +1,8 @@
-#### 🚀 Novanest – The Ultimate Platform for Entrepreneurs, Mentors & Investors
+# 🚀 Novanest – The Ultimate Platform for Entrepreneurs, Mentors & Investors
 
 ## 🌟 Empowering Startups, Connecting Innovators
 
-## 🛑 Problem Statement
+### 🛑 Problem Statement
 
 Entrepreneurs face major hurdles when launching their startups:
 
@@ -15,7 +15,7 @@ Entrepreneurs face major hurdles when launching their startups:
 Most startup platforms lack personalized guidance and efficient matchmaking, making the journey frustrating and time-consuming.
 
 
-## 💡 Solution – What is Novanest?
+### 💡 Solution – What is Novanest?
 
 Novanest is a comprehensive web-based platform designed to help entrepreneurs validate ideas, find mentors, and attract investors.
 
@@ -30,7 +30,7 @@ Novanest is a comprehensive web-based platform designed to help entrepreneurs va
 Novanest simplifies networking, learning, and fundraising in one seamless ecosystem.
 
 
-## ⚙️ Tech Stack
+### ⚙️ Tech Stack
 
 Technology	Description
 
@@ -47,9 +47,9 @@ Authentication	JWT (JSON Web Tokens)
 Deployment	(Add hosting service: AWS, Vercel, etc.)
 
 
-### 🔥 Features & What We Have Built
+## 🔥 Features & What We Have Built
 
-# 👤 User Authentication & Role Management
+### 👤 User Authentication & Role Management
 
 ✔️ Secure sign-up/login with JWT authentication
 
@@ -58,7 +58,7 @@ Deployment	(Add hosting service: AWS, Vercel, etc.)
 ✔️ Role-based access & dashboard customization
 
 
-# 📊 Entrepreneur Dashboard
+### 📊 Entrepreneur Dashboard
 
 ✔️ Profile Section (Name, Experience, Bio, Profile Photo)
 
@@ -67,7 +67,7 @@ Deployment	(Add hosting service: AWS, Vercel, etc.)
 ✔️ AI Chatbot for Business Guidance – Get instant validation on ideas
 
 
-# 💡 Mentor-Entrepreneur Matching
+### 💡 Mentor-Entrepreneur Matching
 
 ✔️ AI-driven mentor recommendations based on expertise similarity
 
@@ -76,14 +76,14 @@ Deployment	(Add hosting service: AWS, Vercel, etc.)
 ✔️ One-click mentorship request & chat integration
 
 
-# 💬 AI Chatbot for Startup Guidance
+### 💬 AI Chatbot for Startup Guidance
 
 ✔️ Integrated Google Gemini PaLM API for real-time suggestions
 
 ✔️ AI guidance on business validation, fundraising, and mentorship
 
 
-# 🚀 PitchDeck Area for Investors
+### 🚀 PitchDeck Area for Investors
 
 ✔️ Startup Feed – Investors browse startup pitch decks
 
@@ -93,9 +93,9 @@ Deployment	(Add hosting service: AWS, Vercel, etc.)
 
 
 
-# 📈 Market Opportunity & Analysis
+## 📈 Market Opportunity & Analysis
 
-## 🌍 The Growing Startup Ecosystem
+### 🌍 The Growing Startup Ecosystem
 
 140M+ startups worldwide, with new businesses launching every day
 
@@ -108,7 +108,7 @@ Novanest taps into this market by bridging the gap between Entrepreneurs, Mentor
 
 ## 💎 How Novanest Stands Out?
 
-# 🚀 Unique Features & Competitive Edge
+### 🚀 Unique Features & Competitive Edge
 
 ✅ AI-Driven Startup Validation – Real-time idea assessment
 
@@ -120,7 +120,7 @@ Novanest taps into this market by bridging the gap between Entrepreneurs, Mentor
 
 Unlike existing platforms that only offer networking, Novanest provides AI-powered insights, automated matchmaking, and a structured pitch showcase, making it a game-changer for startup success.
 
-# 📌 Installation & Setup
+### 📌 Installation & Setup
 
 🔧 Prerequisites
 

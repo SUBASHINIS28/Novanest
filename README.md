@@ -164,7 +164,7 @@ Submit a Pull Request
 
 📞 Contact & Support
 
-For queries or support, contact us at r.nandakishore24@gmail.co
+For queries or support, contact us at r.nandakishore24@gmail.com
 
 🚀 Join Novanest & Build the Future of Startups!
 

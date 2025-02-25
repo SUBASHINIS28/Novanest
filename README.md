@@ -1,4 +1,4 @@
-### 🚀 Novanest – The Ultimate Platform for Entrepreneurs, Mentors & Investors
+#### 🚀 Novanest – The Ultimate Platform for Entrepreneurs, Mentors & Investors
 
 ## 🌟 Empowering Startups, Connecting Innovators
 
@@ -47,7 +47,7 @@ Authentication	JWT (JSON Web Tokens)
 Deployment	(Add hosting service: AWS, Vercel, etc.)
 
 
-## 🔥 Features & What We Have Built
+### 🔥 Features & What We Have Built
 
 # 👤 User Authentication & Role Management
 

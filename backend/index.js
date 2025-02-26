@@ -949,6 +949,44 @@ app.get('/api/notifications/unread/count', authMiddleware, async (req, res) => {
   }
 });
 
+// Replace the expertise route with this simplified version 
+app.put('/api/users/:id/expertise', authMiddleware, async (req, res) => {
+  try {
+    // IMPORTANT FIX: Just use the authenticated user ID from the token
+    // This ignores the URL parameter and ensures users can only update their own profile
+    const tokenUserId = req.user.id.toString();
+    
+    // Extract expertise areas from request
+    const { expertiseAreas } = req.body;
+    
+    if (!expertiseAreas) {
+      return res.status(400).send('No expertise areas provided');
+    }
+    
+    // Convert comma-separated string to array and clean it
+    const expertiseAreasArray = expertiseAreas
+      .split(',')
+      .map(area => area.trim())
+      .filter(area => area.length > 0);
+
+    // Update user in database with expertise areas
+    const updatedUser = await User.findByIdAndUpdate(
+      tokenUserId, // Use token ID directly instead of URL parameter
+      { $set: { expertiseAreas: expertiseAreasArray } },
+      { new: true }
+    ).select('-password');
+
+    if (!updatedUser) {
+      return res.status(404).send('User not found');
+    }
+
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    console.error('Error updating expertise areas:', error);
+    res.status(500).json({ message: 'Server error updating expertise areas' });
+  }
+});
+
 mongoose.connect("mongodb://localhost:27017/novanest", {
   useNewUrlParser: true,
   useUnifiedTopology: true,

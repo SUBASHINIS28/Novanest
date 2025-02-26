@@ -22,20 +22,21 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = await loginUser(formData);
-      localStorage.setItem('token', data.token);
-      alert('Login successful');
-
-      // Redirect to the correct dashboard based on the user's role
-      if (data.role === 'entrepreneur') {
-        navigate('/entrepreneur-dashboard');
-      } else if (data.role === 'investor') {
-        navigate('/investor-dashboard');
-      } else if (data.role === 'mentor') {
-        navigate('/mentor-dashboard');
-      }
+      const response = await loginUser(formData);
+      localStorage.setItem('token', response.token);
+      
+      // Wait for the user context to update before redirecting
+      setTimeout(() => {
+        if (response.role === 'entrepreneur') {
+          navigate('/entrepreneur-dashboard');
+        } else if (response.role === 'investor') {
+          navigate('/investor-dashboard');
+        } else if (response.role === 'mentor') {
+          navigate('/mentor-dashboard');
+        }
+      }, 100);
     } catch (error) {
-      alert(error);
+      alert(error.message || 'Login failed');
     }
   };
 

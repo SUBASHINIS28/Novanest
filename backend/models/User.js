@@ -25,6 +25,10 @@ const userSchema = new mongoose.Schema({
     bio: { type: String, default: '' },
     profilePhoto: { type: String, default: '' },
   },
+  expertiseAreas: {
+    type: [String],
+    default: []
+  },
   notificationPreferences: {
     messages: {
       type: Boolean,

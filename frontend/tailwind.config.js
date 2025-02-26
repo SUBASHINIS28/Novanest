@@ -102,9 +102,42 @@ module.exports = {
         'screen-75': '75vh',
         'screen-50': '50vh',
       },
+      // Add custom button styles
+      button: {
+        base: 'inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-full text-sm font-medium transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2',
+        primary: 'bg-primary hover:bg-primary-dark text-white shadow-primary hover:shadow-lg',
+        secondary: 'bg-white border-2 border-primary text-primary hover:bg-primary hover:text-white',
+        small: 'px-3 py-1.5 text-xs',
+        regular: 'px-4 py-2 text-sm',
+        large: 'px-6 py-3 text-base',
+      }
     },
   },
-  plugins: [],
+  plugins: [
+    // Add a plugin to generate button variants
+    function({ addComponents }) {
+      addComponents({
+        '.btn': {
+          '@apply inline-flex items-center justify-center rounded-full text-[0.65rem] font-medium transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 w-28': {},
+        },
+        '.btn-primary': {
+          '@apply bg-primary text-white shadow-sm hover:bg-primary-dark hover:text-white hover:shadow-md transform hover:-translate-y-0.5': {},
+        },
+        '.btn-secondary': {
+          '@apply bg-white text-gray-800 border-2 border-gray-800 hover:bg-gray-100 hover:text-gray-800 transform hover:-translate-y-0.5': {},
+        },
+        '.btn-small': {
+          '@apply px-2 py-0.5 text-[0.65rem]': {}, // Even smaller text and padding
+        },
+        '.btn-regular': {
+          '@apply px-2.5 py-1 text-[0.7rem]': {},
+        },
+        '.btn-large': {
+          '@apply px-3 py-1.5 text-xs': {},
+        },
+      })
+    }
+  ],
   // Add component customization
   corePlugins: {
     container: false

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 const StartupForm = ({ onSubmit, onClose, initialData = null, isEditing = false }) => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -12,10 +12,8 @@ const StartupForm = ({ onSubmit, onClose, initialData = null, isEditing = false 
   
   const { 
     register, 
-    handleSubmit, 
-    control,
-    formState: { errors, isValid },
-    watch,
+    handleSubmit,
+    formState: { errors },
     reset
   } = useForm({
     mode: 'onChange',
@@ -73,8 +71,6 @@ const StartupForm = ({ onSubmit, onClose, initialData = null, isEditing = false 
     }
   }, [initialData, isEditing, reset]);
   
-  // Watch inputs for conditional rendering if needed
-  const stage = watch('stage');
   
   const handleFileChange = (e, type) => {
     setFileUploads({
@@ -178,8 +174,7 @@ const StartupForm = ({ onSubmit, onClose, initialData = null, isEditing = false 
                   className="w-full p-2 border border-gray-300 rounded-md"
                   {...register('website', {
                     pattern: {
-                      value: /^(http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,}(:[0-9]{1,5})?(\/.*)?$/i,
-                      message: 'Enter a valid URL'
+                      value: /^(http:\/\/|https:\/\/)?[a-z0-9]+([.-][a-z0-9]+)*\.[a-z]{2,}(:[0-9]{1,5})?(\/.*)?$/i                     
                     }
                   })}
                 />

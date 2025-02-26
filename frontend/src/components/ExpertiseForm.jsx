@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const ExpertiseForm = ({ expertiseAreas, onSubmit, onClose }) => {
+const ExpertiseForm = ({ expertiseAreas = [], onSubmit, onClose }) => {
   const [formData, setFormData] = useState(expertiseAreas.join(', '));
 
   const handleChange = (e) => {
@@ -23,7 +23,8 @@ const ExpertiseForm = ({ expertiseAreas, onSubmit, onClose }) => {
             type="text"
             value={formData}
             onChange={handleChange}
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded text-gray-900" // Added text-gray-900 for black text
+            placeholder="e.g. Marketing, Finance, Technology"    // Added placeholder for better UX
             required
           />
         </div>

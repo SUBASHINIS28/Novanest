@@ -155,7 +155,7 @@ const StartupProfile = () => {
         
         {/* Overview Section - Basic Info */}
         <div className="mb-8">
-          <h3 className="text-xl font-semibold border-b-2 border-gray-200 pb-2 mb-4">Startup Overview</h3>
+          <h3 className="text-xl font-semibold border-b-2 border-gray-200 pb-2 mb-4 text-gray-900">Startup Overview</h3>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
@@ -182,39 +182,39 @@ const StartupProfile = () => {
         
         {/* Problem & Solution Section */}
         <div className="mb-8">
-          <h3 className="text-xl font-semibold border-b-2 border-gray-200 pb-2 mb-4">Problem & Solution</h3>
+          <h3 className="text-xl font-semibold border-b-2 border-gray-200 pb-2 mb-4 text-gray-900">Problem & Solution</h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <h4 className="text-lg font-medium mb-2">Problem Statement</h4>
+              <h4 className="text-lg font-medium mb-2 text-gray-900">Problem Statement</h4>
               <p className="text-gray-700">{startup.problemStatement}</p>
             </div>
             
             <div>
-              <h4 className="text-lg font-medium mb-2">Our Solution</h4>
+              <h4 className="text-lg font-medium mb-2 text-gray-900">Our Solution</h4>
               <p className="text-gray-700">{startup.solution}</p>
             </div>
           </div>
           
           <div className="mt-4">
-            <h4 className="text-lg font-medium mb-2">Target Audience</h4>
+            <h4 className="text-lg font-medium mb-2 text-gray-900">Target Audience</h4>
             <p className="text-gray-700">{startup.targetAudience}</p>
           </div>
         </div>
         
         {/* Business Model & Traction */}
         <div className="mb-8">
-          <h3 className="text-xl font-semibold border-b-2 border-gray-200 pb-2 mb-4">Business Model & Traction</h3>
+          <h3 className="text-xl font-semibold border-b-2 border-gray-200 pb-2 mb-4 text-gray-900">Business Model & Traction</h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <h4 className="text-lg font-medium mb-2">Business Description</h4>
+              <h4 className="text-lg font-medium mb-2 text-gray-900">Business Description</h4>
               <p className="text-gray-700">{startup.businessModel}</p>
             </div>
             
             {startup.currentCustomers && (
               <div>
-                <h4 className="text-lg font-medium mb-2">Current Customers/Users</h4>
+                <h4 className="text-lg font-medium mb-2 text-gray-900">Current Customers/Users</h4>
                 <p className="text-gray-700">{startup.currentCustomers}</p>
               </div>
             )}
@@ -222,7 +222,7 @@ const StartupProfile = () => {
           
           {startup.competitors && (
             <div className="mt-4">
-              <h4 className="text-lg font-medium mb-2">Competitor Analysis</h4>
+              <h4 className="text-lg font-medium mb-2 text-gray-900">Competitor Analysis</h4>
               <p className="text-gray-700">{startup.competitors}</p>
             </div>
           )}
@@ -230,7 +230,7 @@ const StartupProfile = () => {
         
         {/* Financial Details */}
         <div className="mb-8">
-          <h3 className="text-xl font-semibold border-b-2 border-gray-200 pb-2 mb-4">Financial Details</h3>
+          <h3 className="text-xl font-semibold border-b-2 border-gray-200 pb-2 mb-4 text-gray-900">Financial Details</h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {startup.fundingGoal && (
@@ -272,14 +272,14 @@ const StartupProfile = () => {
           
           {startup.useOfFunds && (
             <div className="mt-4">
-              <h4 className="text-lg font-medium mb-2">Use of Funds</h4>
+              <h4 className="text-lg font-medium mb-2 text-gray-900">Use of Funds</h4>
               <p className="text-gray-700">{startup.useOfFunds}</p>
             </div>
           )}
           
           {startup.projectedGrowth && (
             <div className="mt-4">
-              <h4 className="text-lg font-medium mb-2">Projected Growth</h4>
+              <h4 className="text-lg font-medium mb-2 text-gray-900">Projected Growth</h4>
               <p className="text-gray-700">{startup.projectedGrowth}</p>
             </div>
           )}
@@ -287,17 +287,17 @@ const StartupProfile = () => {
         
         {/* Team Section */}
         <div className="mb-8">
-          <h3 className="text-xl font-semibold border-b-2 border-gray-200 pb-2 mb-4">The Team</h3>
+          <h3 className="text-xl font-semibold border-b-2 border-gray-200 pb-2 mb-4 text-gray-900">The Team</h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <h4 className="text-lg font-medium mb-2">Founder Background</h4>
+              <h4 className="text-lg font-medium mb-2 text-gray-900">Founder Background</h4>
               <p className="text-gray-700">{startup.founderBackground}</p>
             </div>
             
             {startup.teamMembers && (
               <div>
-                <h4 className="text-lg font-medium mb-2">Team Members</h4>
+                <h4 className="text-lg font-medium mb-2 text-gray-900">Team Members</h4>
                 <p className="text-gray-700">{startup.teamMembers}</p>
               </div>
             )}
@@ -305,7 +305,7 @@ const StartupProfile = () => {
           
           {startup.mentorsAdvisors && (
             <div className="mt-4">
-              <h4 className="text-lg font-medium mb-2">Mentors & Advisors</h4>
+              <h4 className="text-lg font-medium mb-2 text-gray-900">Mentors & Advisors</h4>
               <p className="text-gray-700">{startup.mentorsAdvisors}</p>
             </div>
           )}
@@ -313,7 +313,7 @@ const StartupProfile = () => {
           {/* Founder Information Card */}
           {startup.founderId && (
             <div className="mt-6 bg-gray-50 p-4 rounded-lg border border-gray-200">
-              <h4 className="text-lg font-medium mb-3">Founder Information</h4>
+              <h4 className="text-lg font-medium mb-3 text-gray-900">Founder Information</h4>
               <div className="flex items-center mb-3">
                 <img 
                   src={startup.founderId.profileDetails?.profilePhoto || 'https://via.placeholder.com/50'} 
@@ -321,7 +321,7 @@ const StartupProfile = () => {
                   className="w-16 h-16 rounded-full mr-3 object-cover" 
                 />
                 <div>
-                  <p className="font-semibold text-lg">{startup.founderId.name}</p>
+                  <p className="font-semibold text-lg text-gray-900">{startup.founderId.name}</p>
                   <p className="text-gray-600">{startup.founderId.email}</p>
                 </div>
               </div>
@@ -347,19 +347,19 @@ const StartupProfile = () => {
         
         {/* Market Research */}
         <div className="mb-8">
-          <h3 className="text-xl font-semibold border-b-2 border-gray-200 pb-2 mb-4">Market Research</h3>
+          <h3 className="text-xl font-semibold border-b-2 border-gray-200 pb-2 mb-4 text-gray-900">Market Research</h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {startup.marketSize && (
               <div>
-                <h4 className="text-lg font-medium mb-2">Market Size (TAM)</h4>
+                <h4 className="text-lg font-medium mb-2 text-gray-900">Market Size (TAM)</h4>
                 <p className="text-gray-700">{startup.marketSize}</p>
               </div>
             )}
             
             {startup.customerValidation && (
               <div>
-                <h4 className="text-lg font-medium mb-2">Customer Validation</h4>
+                <h4 className="text-lg font-medium mb-2 text-gray-900">Customer Validation</h4>
                 <p className="text-gray-700">{startup.customerValidation}</p>
               </div>
             )}
@@ -367,7 +367,7 @@ const StartupProfile = () => {
           
           {startup.goToMarketStrategy && (
             <div className="mt-4">
-              <h4 className="text-lg font-medium mb-2">Go-To-Market Strategy</h4>
+              <h4 className="text-lg font-medium mb-2 text-gray-900">Go-To-Market Strategy</h4>
               <p className="text-gray-700">{startup.goToMarketStrategy}</p>
             </div>
           )}
@@ -375,7 +375,7 @@ const StartupProfile = () => {
         
         {/* Pitch Materials */}
         <div className="mb-4">
-          <h3 className="text-xl font-semibold border-b-2 border-gray-200 pb-2 mb-4">Pitch Materials</h3>
+          <h3 className="text-xl font-semibold border-b-2 border-gray-200 pb-2 mb-4 text-gray-900">Pitch Materials</h3>
           
           <div className="flex flex-wrap gap-4">
             <button

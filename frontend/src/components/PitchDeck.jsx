@@ -75,6 +75,15 @@ const PitchDeck = () => {
                     View Pitch Deck
                   </a>
                 )}
+                
+                {/* Add this new button */}
+                <Link 
+                  to={`/startup/${startup._id}`}
+                  className="btn-secondary w-full md:w-auto text-center"
+                >
+                  View Details
+                </Link>
+                
                 {startup.founderId?._id && (
                   <Link 
                     to={`/messages?to=${startup.founderId._id}`} 

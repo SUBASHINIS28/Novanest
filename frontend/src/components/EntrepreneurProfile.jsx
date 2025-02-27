@@ -74,39 +74,46 @@ const EntrepreneurProfile = () => {
             className="w-24 h-24 rounded-full mr-6"
           />
           <div>
-            <h2 className="text-2xl font-bold mb-2">{entrepreneur.name}</h2>
-            <p className="text-gray-600 mb-1"><strong>Role:</strong> {entrepreneur.role.charAt(0).toUpperCase() + entrepreneur.role.slice(1)}</p>
-            <p className="text-gray-600 mb-4"><strong>Email:</strong> {entrepreneur.email}</p>
+            {/* Add text-gray-900 for dark text */}
+            <h2 className="text-2xl font-bold mb-2 text-gray-900">{entrepreneur.name}</h2>
+            <p className="text-gray-700 mb-1">
+              <strong className="text-gray-900">Role:</strong> 
+              {entrepreneur.role.charAt(0).toUpperCase() + entrepreneur.role.slice(1)}
+            </p>
+            <p className="text-gray-700 mb-4">
+              <strong className="text-gray-900">Email:</strong> 
+              {entrepreneur.email}
+            </p>
           </div>
         </div>
         
         <div className="mt-6">
-          <h3 className="text-xl font-semibold mb-2">Bio</h3>
+          <h3 className="text-xl font-semibold mb-2 text-gray-900">Bio</h3>
           <p className="text-gray-700">{entrepreneur.profileDetails.bio || 'No bio available'}</p>
         </div>
         
         {startups.length > 0 && (
           <div className="mt-6">
-            <h3 className="text-xl font-semibold mb-2">Startups</h3>
+            <h3 className="text-xl font-semibold mb-2 text-gray-900">Startups</h3>
             <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
               {startups.map(startup => (
                 <div key={startup._id} className="border rounded-md p-3 bg-gray-50">
-                  <h4 className="font-bold">{startup.startupName}</h4>
-                  <p className="text-sm text-gray-600">Industry: {startup.industry}</p>
-                  <p className="text-sm text-gray-600">Stage: {startup.stage}</p>
+                  <h4 className="font-bold text-gray-900">{startup.startupName}</h4>
+                  <p className="text-sm text-gray-700">Industry: {startup.industry}</p>
+                  <p className="text-sm text-gray-700">Stage: {startup.stage}</p>
                 </div>
               ))}
             </div>
           </div>
         )}
-        
-        <button 
-          onClick={handleRequestMentor} 
-          className="mt-6 btn-primary"
-        >
-          Message Entrepreneur
-        </button>
       </div>
+      
+      <button 
+        onClick={handleRequestMentor} 
+        className="mt-6 btn-primary"
+      >
+        Message Entrepreneur
+      </button>
     </div>
   );
 };

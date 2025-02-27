@@ -60,6 +60,18 @@ const Profile = () => {
     refreshUserData();
   };
 
+  // Update the click handler for the Edit Profile button to check authentication
+  const handleEditClick = () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert("Your session has expired. Please login again.");
+      navigate('/login');
+      return;
+    }
+    
+    // If token exists, show the edit form
+    setShowEditForm(true);
+  };
 
 
   if (contextLoading || loading) {
@@ -121,7 +133,7 @@ const Profile = () => {
             </div>
             
             <button 
-              onClick={() => setShowEditForm(true)}
+              onClick={handleEditClick}
               className="absolute top-4 right-4 flex items-center px-4 py-2 bg-white bg-opacity-90 text-blue-600 rounded-lg shadow-md hover:bg-opacity-100 transition-all duration-200 font-medium text-sm border border-blue-100 backdrop-blur-sm"
             >
               <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

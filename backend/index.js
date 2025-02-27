@@ -734,7 +734,14 @@ app.get('/api/users/:id', authMiddleware, async (req, res) => {
 // Add this route
 app.get('/api/entrepreneurs/:id/startups', async (req, res) => {
   try {
-    const startups = await Startup.find({ founderId: req.params.id });
+    const userId = req.params.id;
+    
+    // Validate the ID before using it
+    if (!userId || userId === 'undefined') {
+      return res.status(400).json({ message: "Invalid user ID" });
+    }
+    
+    const startups = await Startup.find({ founderId: userId });
     res.status(200).json(startups);
   } catch (error) {
     console.error('Error fetching startups:', error);
@@ -745,8 +752,8 @@ app.get('/api/entrepreneurs/:id/startups', async (req, res) => {
 // Update user profile
 app.put('/api/users/:id', authMiddleware, profilePhotoUpload.single('profilePhoto'), async (req, res) => {
   try {
-    // Check if the user is updating their own profile
-    if (req.params.id !== req.user.id) {
+    // Check if the user is updating their own profile - FIXED COMPARISON
+    if (req.params.id.toString() !== req.user.id.toString()) {
       return res.status(403).send('You can only update your own profile');
     }
     

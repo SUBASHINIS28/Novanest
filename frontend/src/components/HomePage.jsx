@@ -9,7 +9,7 @@ const HomePage = () => {
         <div className="container mx-auto flex justify-between items-center">
           <h1 className="text-white text-4xl font-extrabold">Novanest</h1>
           <nav>
-            <Link to="/signup" className="text-white mx-4 hover:underline">Sign Up</Link>
+            <Link to="/register" className="text-white mx-4 hover:underline">Sign Up</Link>
             <Link to="/login" className="text-white mx-4 hover:underline">Login</Link>
           </nav>
         </div>
@@ -20,7 +20,7 @@ const HomePage = () => {
           Your AI-powered incubation platform for entrepreneurs, investors, and mentors.
         </p>
         <div>
-          <Link to="/signup" className="bg-white text-blue-600 py-3 px-6 rounded-full shadow-lg hover:bg-blue-600 hover:text-white transition duration-300 ease-in-out mr-4">Get Started</Link>
+          <Link to="/register" className="bg-white text-blue-600 py-3 px-6 rounded-full shadow-lg hover:bg-blue-600 hover:text-white transition duration-300 ease-in-out mr-4">Get Started</Link>
           <Link to="/login" className="bg-gray-800 text-white py-3 px-6 rounded-full shadow-lg hover:bg-gray-700 transition duration-300 ease-in-out">Login</Link>
         </div>
       </main>

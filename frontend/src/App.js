@@ -15,6 +15,7 @@ import NavBar from './components/NavBar';
 import StartupSearch from './components/StartupSearch';
 import NotificationCenter from './components/NotificationCenter';
 import Settings from './components/Settings';
+import HomePage from './components/HomePage';
 import { UserProvider } from './UserContext';
 
 const ProtectedRoute = ({ children }) => {
@@ -44,9 +45,17 @@ function App() {
     <UserProvider>
       <Router>
         <Routes>
+          {/* Set HomePage as the root route */}
+          <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Signup />} />
-          <Route path="/profile" element={<MainLayout><Profile /></MainLayout>} />
+          
+          {/* Protected Routes */}
+          <Route path="/profile" element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          } />
           <Route path="/startup/:id" element={<MainLayout><StartupProfile /></MainLayout>} />
           <Route path="/entrepreneur-dashboard" element={<MainLayout><EntrepreneurDashboard /></MainLayout>} />
           <Route path="/investor-dashboard" element={<MainLayout><InvestorDashboard /></MainLayout>} />
@@ -70,8 +79,9 @@ function App() {
               <Settings />
             </ProtectedRoute>
           } />
-          <Route path="/" element={<Navigate to="/login" />} />
-          <Route path="*" element={<Navigate to="/login" />} />
+          
+          {/* Change fallback route to home page */}
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>
     </UserProvider>

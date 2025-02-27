@@ -2,14 +2,17 @@ import React, { useContext, useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../UserContext';
 import axios from 'axios';
+import Modal from './Modal';
+import ProfileEditForm from './ProfileEditForm';
 
 const NavBar = () => {
-  const { user } = useContext(UserContext);
+  const { user, refreshUserData } = useContext(UserContext);
   const navigate = useNavigate();
   const [unreadCount, setUnreadCount] = useState(0);
   const [unreadNotificationCount, setUnreadNotificationCount] = useState(0);
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
+  const [showEditProfileForm, setShowEditProfileForm] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -47,7 +50,7 @@ const NavBar = () => {
         setShowDropdown(false);
       }
     };
-    
+
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
@@ -57,6 +60,17 @@ const NavBar = () => {
   const handleLogout = () => {
     localStorage.removeItem('token');
     navigate('/login');
+  };
+
+  // Handle edit profile click
+  const handleEditProfileClick = () => {
+    setShowEditProfileForm(true);
+    setShowDropdown(false); // Close the dropdown
+  };
+
+  const handleProfileUpdate = (updatedUser) => {
+    // Update user data in context
+    refreshUserData();
   };
 
   // Determine dashboard route based on role
@@ -71,7 +85,21 @@ const NavBar = () => {
     }
   };
 
-  if (!user) return null; // Don't show navbar if not logged in
+  if (!user) {
+    return (
+      <nav className="bg-background-dark py-4 px-6 shadow-lg">
+        <div className="container mx-auto flex justify-between items-center">
+          <Link to="/" className="text-2xl font-bold text-white">
+            Novanest
+          </Link>
+          <div className="flex items-center space-x-4">
+            <Link to="/login" className="nav-link">Login</Link>
+            <Link to="/register" className="nav-link">Sign Up</Link>
+          </div>
+        </div>
+      </nav>
+    );
+  }
 
   return (
     <nav className="bg-background-dark py-4 px-6 shadow-lg">
@@ -165,13 +193,12 @@ const NavBar = () => {
                 >
                   View Profile
                 </Link>
-                <Link 
-                  to="/profile/edit" 
-                  className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                  onClick={() => setShowDropdown(false)}
+                <button 
+                  onClick={handleEditProfileClick}
+                  className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
                 >
                   Edit Profile
-                </Link>
+                </button>
                 <Link 
                   to="/settings" 
                   className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
@@ -194,6 +221,16 @@ const NavBar = () => {
           </div>
         </div>
       </div>
+      {/* Add the modal at the bottom of your component */}
+      {showEditProfileForm && (
+        <Modal show={showEditProfileForm} onClose={() => setShowEditProfileForm(false)}>
+          <ProfileEditForm 
+            user={user} 
+            onUpdate={handleProfileUpdate} 
+            onClose={() => setShowEditProfileForm(false)} 
+          />
+        </Modal>
+      )}
     </nav>
   );
 };

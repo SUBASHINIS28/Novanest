@@ -148,7 +148,7 @@ const StartupForm = ({ onSubmit, onClose, initialData = null, isEditing = false 
                 <label className="block text-gray-700 mb-1">Startup Name*</label>
                 <input
                   type="text"
-                  className={`w-full p-2 border rounded-md ${errors.startupName ? 'border-red-500' : 'border-gray-300'}`}
+                  className={`w-full p-2 border rounded-md text-gray-900 ${errors.startupName ? 'border-red-500' : 'border-gray-300'}`}
                   {...register('startupName', { required: 'Startup name is required' })}
                 />
                 {errors.startupName && <p className="text-red-500 text-sm mt-1">{errors.startupName.message}</p>}
@@ -159,7 +159,7 @@ const StartupForm = ({ onSubmit, onClose, initialData = null, isEditing = false 
                 <input
                   type="text"
                   placeholder="A short description of your startup"
-                  className="w-full p-2 border border-gray-300 rounded-md"
+                  className="w-full p-2 border border-gray-300 rounded-md text-gray-900"
                   {...register('tagline')}
                 />
               </div>
@@ -171,7 +171,7 @@ const StartupForm = ({ onSubmit, onClose, initialData = null, isEditing = false 
                 <input
                   type="text"
                   placeholder="https://your-startup.com"
-                  className="w-full p-2 border border-gray-300 rounded-md"
+                  className="w-full p-2 border border-gray-300 rounded-md text-gray-900"
                   {...register('website', {
                     pattern: {
                       value: /^(http:\/\/|https:\/\/)?[a-z0-9]+([.-][a-z0-9]+)*\.[a-z]{2,}(:[0-9]{1,5})?(\/.*)?$/i                     
@@ -186,7 +186,7 @@ const StartupForm = ({ onSubmit, onClose, initialData = null, isEditing = false 
                 <input
                   type="text"
                   placeholder="City, Country"
-                  className={`w-full p-2 border rounded-md ${errors.location ? 'border-red-500' : 'border-gray-300'}`}
+                  className={`w-full p-2 border rounded-md text-gray-900 ${errors.location ? 'border-red-500' : 'border-gray-300'}`}
                   {...register('location', { required: 'Location is required' })}
                 />
                 {errors.location && <p className="text-red-500 text-sm mt-1">{errors.location.message}</p>}
@@ -210,7 +210,7 @@ const StartupForm = ({ onSubmit, onClose, initialData = null, isEditing = false 
               <div>
                 <label className="block text-gray-700 mb-1">Industry Category*</label>
                 <select
-                  className={`w-full p-2 border rounded-md ${errors.industry ? 'border-red-500' : 'border-gray-300'}`}
+                  className={`w-full p-2 border rounded-md text-gray-900 ${errors.industry ? 'border-red-500' : 'border-gray-300'}`}
                   {...register('industry', { required: 'Industry is required' })}
                 >
                   <option value="">Select Industry</option>
@@ -232,7 +232,7 @@ const StartupForm = ({ onSubmit, onClose, initialData = null, isEditing = false 
               <div>
                 <label className="block text-gray-700 mb-1">Stage*</label>
                 <select
-                  className={`w-full p-2 border rounded-md ${errors.stage ? 'border-red-500' : 'border-gray-300'}`}
+                  className={`w-full p-2 border rounded-md text-gray-900 ${errors.stage ? 'border-red-500' : 'border-gray-300'}`}
                   {...register('stage', { required: 'Stage is required' })}
                 >
                   <option value="">Select Stage</option>
@@ -255,7 +255,7 @@ const StartupForm = ({ onSubmit, onClose, initialData = null, isEditing = false 
               <textarea
                 placeholder="What problem is your startup solving?"
                 rows={3}
-                className={`w-full p-2 border rounded-md ${errors.problemStatement ? 'border-red-500' : 'border-gray-300'}`}
+                className={`w-full p-2 border rounded-md text-gray-900 ${errors.problemStatement ? 'border-red-500' : 'border-gray-300'}`}
                 {...register('problemStatement', { required: 'Problem statement is required' })}
               ></textarea>
               {errors.problemStatement && <p className="text-red-500 text-sm mt-1">{errors.problemStatement.message}</p>}
@@ -266,7 +266,7 @@ const StartupForm = ({ onSubmit, onClose, initialData = null, isEditing = false 
               <textarea
                 placeholder="How does your product/service solve this problem?"
                 rows={3}
-                className={`w-full p-2 border rounded-md ${errors.solution ? 'border-red-500' : 'border-gray-300'}`}
+                className={`w-full p-2 border rounded-md text-gray-900 ${errors.solution ? 'border-red-500' : 'border-gray-300'}`}
                 {...register('solution', { required: 'Solution is required' })}
               ></textarea>
               {errors.solution && <p className="text-red-500 text-sm mt-1">{errors.solution.message}</p>}
@@ -276,7 +276,7 @@ const StartupForm = ({ onSubmit, onClose, initialData = null, isEditing = false 
               <label className="block text-gray-700 mb-1">Target Audience*</label>
               <textarea
                 placeholder="Who are your potential customers/users?"
-                className={`w-full p-2 border rounded-md ${errors.targetAudience ? 'border-red-500' : 'border-gray-300'}`}
+                className={`w-full p-2 border rounded-md text-gray-900 ${errors.targetAudience ? 'border-red-500' : 'border-gray-300'}`}
                 {...register('targetAudience', { required: 'Target audience is required' })}
               ></textarea>
               {errors.targetAudience && <p className="text-red-500 text-sm mt-1">{errors.targetAudience.message}</p>}
@@ -286,7 +286,7 @@ const StartupForm = ({ onSubmit, onClose, initialData = null, isEditing = false 
               <div>
                 <label className="block text-gray-700 mb-1">Business Model Type*</label>
                 <select
-                  className={`w-full p-2 border rounded-md ${errors.businessModelType ? 'border-red-500' : 'border-gray-300'}`}
+                  className={`w-full p-2 border rounded-md text-gray-900 ${errors.businessModelType ? 'border-red-500' : 'border-gray-300'}`}
                   {...register('businessModelType', { required: 'Business model type is required' })}
                 >
                   <option value="">Select Business Model</option>
@@ -307,7 +307,7 @@ const StartupForm = ({ onSubmit, onClose, initialData = null, isEditing = false 
                 <input
                   type="text"
                   placeholder="Number of users, key clients, etc."
-                  className="w-full p-2 border border-gray-300 rounded-md"
+                  className="w-full p-2 border border-gray-300 rounded-md text-gray-900"
                   {...register('currentCustomers')}
                 />
               </div>
@@ -317,7 +317,7 @@ const StartupForm = ({ onSubmit, onClose, initialData = null, isEditing = false 
               <label className="block text-gray-700 mb-1">Competitor Analysis</label>
               <textarea
                 placeholder="List main competitors and how you're different"
-                className="w-full p-2 border border-gray-300 rounded-md"
+                className="w-full p-2 border border-gray-300 rounded-md text-gray-900"
                 {...register('competitors')}
               ></textarea>
             </div>
@@ -327,7 +327,7 @@ const StartupForm = ({ onSubmit, onClose, initialData = null, isEditing = false 
               <textarea
                 placeholder="A detailed description of your business"
                 rows={4}
-                className={`w-full p-2 border rounded-md ${errors.businessModel ? 'border-red-500' : 'border-gray-300'}`}
+                className={`w-full p-2 border rounded-md text-gray-900 ${errors.businessModel ? 'border-red-500' : 'border-gray-300'}`}
                 {...register('businessModel', { required: 'Business description is required' })}
               ></textarea>
               {errors.businessModel && <p className="text-red-500 text-sm mt-1">{errors.businessModel.message}</p>}
@@ -350,7 +350,7 @@ const StartupForm = ({ onSubmit, onClose, initialData = null, isEditing = false 
                   <input
                     type="text"
                     placeholder="Amount in USD"
-                    className={`flex-1 p-2 border rounded-r-md ${errors.fundingGoal ? 'border-red-500' : 'border-gray-300'}`}
+                    className={`flex-1 p-2 border rounded-r-md text-gray-900 ${errors.fundingGoal ? 'border-red-500' : 'border-gray-300'}`}
                     {...register('fundingGoal', { 
                       required: 'Funding goal is required',
                       pattern: {
@@ -368,7 +368,7 @@ const StartupForm = ({ onSubmit, onClose, initialData = null, isEditing = false 
                 <input
                   type="text"
                   placeholder="Percentage of equity available"
-                  className="w-full p-2 border border-gray-300 rounded-md"
+                  className="w-full p-2 border border-gray-300 rounded-md text-gray-900"
                   {...register('equityOffered', {
                     pattern: {
                       value: /^(\d{1,2}(\.\d{1,2})?|100)$/,
@@ -385,7 +385,7 @@ const StartupForm = ({ onSubmit, onClose, initialData = null, isEditing = false 
               <textarea
                 placeholder="How will you use the investment? (e.g. Product Development, Marketing, Hiring)"
                 rows={3}
-                className={`w-full p-2 border rounded-md ${errors.useOfFunds ? 'border-red-500' : 'border-gray-300'}`}
+                className={`w-full p-2 border rounded-md text-gray-900 ${errors.useOfFunds ? 'border-red-500' : 'border-gray-300'}`}
                 {...register('useOfFunds', { required: 'Use of funds is required' })}
               ></textarea>
               {errors.useOfFunds && <p className="text-red-500 text-sm mt-1">{errors.useOfFunds.message}</p>}
@@ -395,7 +395,7 @@ const StartupForm = ({ onSubmit, onClose, initialData = null, isEditing = false 
               <label className="block text-gray-700 mb-1">Previous Funding (if any)</label>
               <textarea
                 placeholder="Amount raised, investors, valuation, etc."
-                className="w-full p-2 border border-gray-300 rounded-md"
+                className="w-full p-2 border border-gray-300 rounded-md text-gray-900"
                 {...register('previousFunding')}
               ></textarea>
             </div>
@@ -406,7 +406,7 @@ const StartupForm = ({ onSubmit, onClose, initialData = null, isEditing = false 
               <label className="block text-gray-700 mb-1">Revenue Model</label>
               <textarea
                 placeholder="How does your startup generate revenue?"
-                className="w-full p-2 border border-gray-300 rounded-md"
+                className="w-full p-2 border border-gray-300 rounded-md text-gray-900"
                 {...register('revenueModel')}
               ></textarea>
             </div>
@@ -421,7 +421,7 @@ const StartupForm = ({ onSubmit, onClose, initialData = null, isEditing = false 
                   <input
                     type="text"
                     placeholder="Amount in USD"
-                    className="flex-1 p-2 border border-gray-300 rounded-r-md"
+                    className="flex-1 p-2 border border-gray-300 rounded-r-md text-gray-900"
                     {...register('currentRevenue')}
                   />
                 </div>
@@ -436,7 +436,7 @@ const StartupForm = ({ onSubmit, onClose, initialData = null, isEditing = false 
                   <input
                     type="text"
                     placeholder="Amount in USD"
-                    className="flex-1 p-2 border border-gray-300 rounded-r-md"
+                    className="flex-1 p-2 border border-gray-300 rounded-r-md text-gray-900"
                     {...register('burnRate')}
                   />
                 </div>
@@ -447,7 +447,7 @@ const StartupForm = ({ onSubmit, onClose, initialData = null, isEditing = false 
               <label className="block text-gray-700 mb-1">Projected Growth</label>
               <textarea
                 placeholder="Expected revenue in 6 months, 1 year, 3 years"
-                className="w-full p-2 border border-gray-300 rounded-md"
+                className="w-full p-2 border border-gray-300 rounded-md text-gray-900"
                 {...register('projectedGrowth')}
               ></textarea>
             </div>
@@ -490,7 +490,7 @@ const StartupForm = ({ onSubmit, onClose, initialData = null, isEditing = false 
               <textarea
                 placeholder="Your education & previous experience"
                 rows={3}
-                className={`w-full p-2 border rounded-md ${errors.founderBackground ? 'border-red-500' : 'border-gray-300'}`}
+                className={`w-full p-2 border rounded-md text-gray-900 ${errors.founderBackground ? 'border-red-500' : 'border-gray-300'}`}
                 {...register('founderBackground', { required: 'Founder background is required' })}
               ></textarea>
               {errors.founderBackground && <p className="text-red-500 text-sm mt-1">{errors.founderBackground.message}</p>}
@@ -500,7 +500,7 @@ const StartupForm = ({ onSubmit, onClose, initialData = null, isEditing = false 
               <label className="block text-gray-700 mb-1">Team Members (if any)</label>
               <textarea
                 placeholder="Key team members & their roles"
-                className="w-full p-2 border border-gray-300 rounded-md"
+                className="w-full p-2 border border-gray-300 rounded-md text-gray-900"
                 {...register('teamMembers')}
               ></textarea>
             </div>
@@ -509,7 +509,7 @@ const StartupForm = ({ onSubmit, onClose, initialData = null, isEditing = false 
               <label className="block text-gray-700 mb-1">Market Size</label>
               <textarea
                 placeholder="Total Addressable Market (TAM) in $"
-                className="w-full p-2 border border-gray-300 rounded-md"
+                className="w-full p-2 border border-gray-300 rounded-md text-gray-900"
                 {...register('marketSize')}
               ></textarea>
             </div>
@@ -518,7 +518,7 @@ const StartupForm = ({ onSubmit, onClose, initialData = null, isEditing = false 
               <label className="block text-gray-700 mb-1">Go-To-Market Strategy</label>
               <textarea
                 placeholder="How do you plan to acquire customers?"
-                className="w-full p-2 border border-gray-300 rounded-md"
+                className="w-full p-2 border border-gray-300 rounded-md text-gray-900"
                 {...register('goToMarketStrategy')}
               ></textarea>
             </div>

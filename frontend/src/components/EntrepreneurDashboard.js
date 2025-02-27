@@ -20,6 +20,12 @@ const EntrepreneurDashboard = () => {
       setExpertiseAreas(user.expertiseAreas || []);
       const fetchStartups = async () => {
         try {
+          // Make sure user.id exists before making the API call
+          if (!user.id) {
+            console.log("User ID not available yet");
+            return;
+          }
+          
           const response = await axios.get(`http://localhost:5000/api/entrepreneurs/${user.id}/startups`);
           setStartups(response.data);
         } catch (error) {
@@ -205,7 +211,7 @@ const EntrepreneurDashboard = () => {
                 }}
               />
               <div className="ml-3">
-                <p className="text-sm font-medium">{user.name}</p>
+                <p className="text-sm font-medium text-gray-200">{user.name}</p>
                 <p className="text-xs text-gray-400">Entrepreneur</p>
               </div>
             </div>

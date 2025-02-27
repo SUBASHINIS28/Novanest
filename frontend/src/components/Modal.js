@@ -6,12 +6,12 @@ const Modal = ({ show, onClose, children }) => {
   }
 
   return (
-    <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white p-4 rounded-lg shadow-lg">
-        <button onClick={onClose} className="absolute top-2 right-2 text-gray-600">
-          &times;
-        </button>
-        {children}
+    <div className="fixed inset-0 overflow-y-auto z-50">
+      <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center">
+        <div className="fixed inset-0 bg-black opacity-50 transition-opacity" onClick={onClose}></div>
+        <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full z-50">
+          {children}
+        </div>
       </div>
     </div>
   );

@@ -731,17 +731,33 @@ app.get('/api/users/:id', authMiddleware, async (req, res) => {
   }
 });
 
-// Add this route
-app.get('/api/entrepreneurs/:id/startups', async (req, res) => {
+// Find around line 734 where this endpoint is defined
+app.get('/api/entrepreneurs/:id/startups', authMiddleware, async (req, res) => {
   try {
     const userId = req.params.id;
+    const authUserId = req.user.id;
+    
+    // Debug log the IDs to verify they match
+    console.log('URL param ID:', userId);
+    console.log('Auth token ID:', authUserId);
+    console.log('ID types:', typeof userId, typeof authUserId);
     
     // Validate the ID before using it
     if (!userId || userId === 'undefined') {
       return res.status(400).json({ message: "Invalid user ID" });
     }
     
+    // Ensure consistent ID format by converting both to strings for comparison
+    // Add protection so users can only see their own startups (optional security)
+    // const isOwnStartups = userId.toString() === authUserId.toString();
+    // if (!isOwnStartups) {
+    //   return res.status(403).json({ message: "Unauthorized" });
+    // }
+    
+    // Find startups with proper ID conversion if needed
     const startups = await Startup.find({ founderId: userId });
+    console.log(`Found ${startups.length} startups for user ${userId}`);
+    
     res.status(200).json(startups);
   } catch (error) {
     console.error('Error fetching startups:', error);

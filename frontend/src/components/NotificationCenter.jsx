@@ -6,6 +6,7 @@ const NotificationCenter = () => {
   const { user } = useContext(UserContext);
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchNotifications = async () => {
@@ -14,9 +15,12 @@ const NotificationCenter = () => {
           const response = await axios.get('http://localhost:5000/api/notifications', {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
           });
+          console.log('Fetched notifications:', response.data);
           setNotifications(response.data);
+          setError(null);
         } catch (error) {
           console.error('Error fetching notifications:', error);
+          setError('Failed to load notifications');
         } finally {
           setLoading(false);
         }
@@ -49,6 +53,10 @@ const NotificationCenter = () => {
     return <div className="p-4 text-center">Loading notifications...</div>;
   }
 
+  if (error) {
+    return <div className="p-4 text-center text-red-500">{error}</div>;
+  }
+
   return (
     <div className="bg-white shadow-md rounded-lg overflow-hidden">
       <div className="p-4 border-b">
@@ -68,9 +76,9 @@ const NotificationCenter = () => {
               <div className="flex items-start">
                 <div className={`w-2 h-2 rounded-full mt-2 mr-2 ${!notification.read ? 'bg-blue-500' : 'bg-transparent'}`}></div>
                 <div className="flex-1">
-                  <p className="text-sm">{notification.message}</p>
+                  <p className="text-sm font-medium text-gray-900">{notification.message || 'No message content'}</p>
                   <p className="text-xs text-gray-500 mt-1">
-                    {new Date(notification.createdAt).toLocaleString()}
+                    {notification.createdAt ? new Date(notification.createdAt).toLocaleString() : 'No date'}
                   </p>
                 </div>
               </div>

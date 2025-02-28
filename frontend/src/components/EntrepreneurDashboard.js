@@ -16,20 +16,87 @@ const EntrepreneurDashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   useEffect(() => {
-    if (user && user.id) {
-      setExpertiseAreas(user.expertiseAreas || []);
+    if (user) {
+      // Debug user object
+      console.log("User data:", user);
+      
+      // Check if expertise areas exist
+      if (user.expertiseAreas) {
+        console.log("Expertise areas:", user.expertiseAreas);
+        setExpertiseAreas(user.expertiseAreas);
+      } else {
+        console.log("No expertise areas found in user object");
+        // Fetch expertise areas separately if needed
+        const fetchExpertiseAreas = async () => {
+          try {
+            const response = await axios.get(`http://localhost:5000/api/users/${user.id}/expertise`, {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+              },
+            });
+            setExpertiseAreas(response.data.expertiseAreas || []);
+          } catch (error) {
+            console.error('Error fetching expertise areas:', error);
+          }
+        };
+        fetchExpertiseAreas();
+      }
+    }
+  }, [user]);
+
+  useEffect(() => {
+    // Only proceed if user is fully loaded (not just the loading state completed)
+    if (user && user.id && !loading) {
       const fetchStartups = async () => {
         try {
-          // Make sure user.id exists before making the API call
-          if (!user.id) {
-            console.log("User ID not available yet");
-            return;
-          }
+          console.log("Fetching startups for user ID:", user.id);
           
-          const response = await axios.get(`http://localhost:5000/api/entrepreneurs/${user.id}/startups`);
-          setStartups(response.data);
+          // First try the entrepreneur-specific endpoint
+          const response = await axios.get(`http://localhost:5000/api/entrepreneurs/${user.id}/startups`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+          });
+          
+          console.log("Startups response data:", response.data);
+          
+          if (Array.isArray(response.data) && response.data.length > 0) {
+            // If we get data, use it
+            setStartups(response.data);
+          } else {
+            console.log("No startups found or invalid data format, trying alternative endpoint");
+            
+            // If no data, try the general startups endpoint with a filter
+            const generalResponse = await axios.get(`http://localhost:5000/api/startups?founderId=${user.id}`, {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+              },
+            });
+            
+            console.log("General startups response:", generalResponse.data);
+            
+            if (Array.isArray(generalResponse.data)) {
+              setStartups(generalResponse.data);
+            } else {
+              console.error("Both endpoints returned invalid data format");
+              setStartups([]);
+            }
+          }
         } catch (error) {
-          console.error('Error fetching startups:', error);
+          console.error('Error fetching startups:', error.response?.data || error.message);
+          // Add a fallback to the general endpoint if specific one fails
+          try {
+            console.log("Trying fallback endpoint");
+            const fallbackResponse = await axios.get(`http://localhost:5000/api/startups?founderId=${user.id}`, {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+              },
+            });
+            setStartups(fallbackResponse.data || []);
+          } catch (fallbackError) {
+            console.error('Fallback error:', fallbackError);
+            setStartups([]);
+          }
         }
       };
 
@@ -49,7 +116,7 @@ const EntrepreneurDashboard = () => {
       };
       fetchRecommendedMentors();
     }
-  }, [user]);
+  }, [user, loading]);
 
   const handleCreateStartup = () => {
     setShowForm(true);
@@ -249,7 +316,7 @@ const EntrepreneurDashboard = () => {
               <div className="bg-white rounded-lg p-6 text-center shadow-sm">
                 <p className="text-gray-500">You haven't posted any startups yet.</p>
                 <button 
-                  onClick={handleCreateFirstStartup}  // Change from handleCreateStartup
+                  onClick={handleCreateFirstStartup}
                   className="btn btn-secondary btn-small mx-auto mt-4"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-2.5 w-2.5 mr-1" viewBox="0 0 20 20" fill="currentColor">
@@ -263,8 +330,8 @@ const EntrepreneurDashboard = () => {
                 {startups.map((startup) => (
                   <div key={startup._id} className="bg-white shadow-sm hover:shadow-md rounded-lg overflow-hidden transition-all duration-200 border border-gray-100">
                     <div className="p-4">
-                      <h3 className="text-lg font-bold text-gray-900 mb-1">{startup.name}</h3>
-                      <p className="text-gray-600 mb-3 text-sm line-clamp-2">{startup.description}</p>
+                      <h3 className="text-lg font-bold text-gray-900 mb-1">{startup.startupName}</h3>
+                      <p className="text-gray-600 mb-3 text-sm line-clamp-2">{startup.tagline || startup.problemStatement || 'No description available'}</p>
                       <div className="flex justify-between items-center">
                         <span className="text-xs bg-gray-200 text-gray-800 px-2 py-0.5 rounded-full">{startup.industry}</span>
                         <Link to={`/startup/${startup._id}`} className="text-gray-800 font-medium hover:underline text-sm flex items-center">

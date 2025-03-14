@@ -79,7 +79,7 @@ const Requests = ({ mentorshipRequests = [], refreshRequests }) => {
             </div>
             <input
               type="text"
-              className="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
+              className="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md text-gray-800 placeholder-gray-400"
               placeholder="Search by name or startup"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -93,7 +93,7 @@ const Requests = ({ mentorshipRequests = [], refreshRequests }) => {
           </label>
           <select
             id="status-filter"
-            className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+            className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md text-gray-800"
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
           >

@@ -30,6 +30,13 @@ const MentorDashboard = () => {
   useEffect(() => {
     if (user && user._id) {
       fetchDashboardData();
+      
+      // Set up auto-refresh every 2 minutes
+      const refreshInterval = setInterval(() => {
+        fetchDashboardData();
+      }, 120000); // 2 minutes
+      
+      return () => clearInterval(refreshInterval);
     }
   }, [user, refreshTrigger]);
 
@@ -151,19 +158,13 @@ const MentorDashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 via-white to-blue-50">
-      <div className="flex min-h-screen relative">
-        {/* Animated background elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute w-96 h-96 -top-48 -right-48 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-5 animate-blob"></div>
-          <div className="absolute w-96 h-96 top-1/3 -left-48 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-5 animate-blob animation-delay-4000"></div>
-        </div>
-      
-        {/* Sidebar */}
-        <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} user={user} />
-        
-        {/* Main Content */}
-        <div className="flex-1 p-6 lg:p-8 overflow-y-auto">
+    <div className="flex h-screen bg-slate-50">
+      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} user={user} />
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <header className="bg-white border-b border-slate-200 shadow-sm">
+          {/* ... header content ... */}
+        </header>
+        <main className="flex-1 overflow-y-auto bg-gradient-to-br from-slate-50 to-slate-100 p-6">
           <div className="max-w-7xl mx-auto">
             {/* User welcome section */}
             <motion.div 
@@ -204,30 +205,9 @@ const MentorDashboard = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
             >
-              <button 
-                onClick={refreshData}
-                disabled={isDataLoading}
-                className={`inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${isDataLoading ? 'opacity-70 cursor-wait' : ''}`}
-              >
-                {isDataLoading ? (
-                  <>
-                    <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    Refreshing...
-                  </>
-                ) : (
-                  <>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clipRule="evenodd" />
-                    </svg>
-                    Refresh Dashboard
-                  </>
-                )}
-              </button>
+              {/* Refresh button removed from here */}
               
-              <div className="flex gap-3">
+              <div className="flex gap-3 ml-auto">
                 {activeTab === 'office-hours' && (
                   <button 
                     onClick={() => document.getElementById('add-slot-button')?.click()}
@@ -309,7 +289,7 @@ const MentorDashboard = () => {
               </motion.div>
             </AnimatePresence>
           </div>
-        </div>
+        </main>
       </div>
       
       {/* Floating toast notifications */}

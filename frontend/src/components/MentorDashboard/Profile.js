@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { UserContext } from '../../UserContext';
+import Button from '../../components/common/Button';
 
 const Profile = () => {
   const { user } = useContext(UserContext);
@@ -207,9 +208,9 @@ const Profile = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Main Profile Column */}
         <div className="lg:col-span-2">
-          <div className="bg-white shadow-sm rounded-lg overflow-hidden">
-            <div className="p-4 border-b border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-800">Basic Information</h3>
+          <div className="bg-white shadow-sm rounded-lg overflow-hidden border border-slate-100 hover:shadow-md transition-all duration-300">
+            <div className="p-4 border-b border-slate-100">
+              <h3 className="text-lg font-semibold text-slate-800">Basic Information</h3>
             </div>
             <div className="p-5">
               <form onSubmit={handleProfileSubmit}>
@@ -225,7 +226,7 @@ const Profile = () => {
                       value={profileForm.name}
                       onChange={handleProfileChange}
                       required
-                      className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                      className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-gray-800"
                     />
                   </div>
                   <div className="flex-1">
@@ -238,7 +239,7 @@ const Profile = () => {
                       name="email"
                       defaultValue={user?.email}
                       disabled
-                      className="block w-full border-gray-300 rounded-md shadow-sm bg-gray-50 sm:text-sm"
+                      className="block w-full border-gray-300 rounded-md shadow-sm bg-gray-50 sm:text-sm text-gray-800" // Added text-gray-800
                     />
                     <p className="mt-1 text-xs text-gray-500">Email cannot be changed</p>
                   </div>
@@ -254,7 +255,7 @@ const Profile = () => {
                     rows={4}
                     value={profileForm.bio}
                     onChange={handleProfileChange}
-                    className="block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-gray-800"
                     placeholder="Share your professional background, expertise, and mentorship philosophy..."
                   ></textarea>
                   <p className="mt-1 text-xs text-gray-500">Brief bio that appears on your public profile</p>
@@ -271,7 +272,7 @@ const Profile = () => {
                       name="currentPosition"
                       value={profileForm.currentPosition}
                       onChange={handleProfileChange}
-                      className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                      className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-gray-800"
                       placeholder="e.g. CEO at TechVentures"
                     />
                   </div>
@@ -285,7 +286,7 @@ const Profile = () => {
                       name="location"
                       value={profileForm.location}
                       onChange={handleProfileChange}
-                      className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                      className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-gray-800"
                       placeholder="e.g. San Francisco, CA"
                     />
                   </div>
@@ -304,7 +305,7 @@ const Profile = () => {
                       name="linkedin"
                       value={profileForm.linkedin}
                       onChange={handleProfileChange}
-                      className="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300"
+                      className="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300 text-gray-800"
                       placeholder="yourprofile"
                     />
                   </div>
@@ -323,10 +324,12 @@ const Profile = () => {
                 )}
                 
                 <div className="mt-5 flex justify-end">
-                  <button
+                  <Button
                     type="submit"
+                    variant="primary"
+                    size="md"
                     disabled={saving}
-                    className={`inline-flex justify-center items-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${saving ? 'opacity-70 cursor-not-allowed' : ''}`}
+                    className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium border-0 shadow-md"
                   >
                     {saving ? (
                       <>
@@ -337,7 +340,7 @@ const Profile = () => {
                         Saving...
                       </>
                     ) : 'Save Changes'}
-                  </button>
+                  </Button>
                 </div>
               </form>
             </div>
@@ -353,20 +356,21 @@ const Profile = () => {
                   value={expertiseInput}
                   onChange={(e) => setExpertiseInput(e.target.value)}
                   placeholder="Add expertise..."
-                  className="text-sm border-gray-300 rounded-md mr-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="text-sm border-slate-200 rounded-md mr-2 focus:ring-indigo-500 focus:border-indigo-500 text-slate-800 shadow-sm"
                 />
-                <button 
-                  type="button"
+                <Button 
+                  variant="primary"
+                  size="sm"
                   onClick={() => {
                     if (expertiseInput.trim()) {
                       handleAddExpertise(expertiseInput.trim());
                       setExpertiseInput('');
                     }
                   }}
-                  className="text-sm text-blue-600 font-medium hover:text-blue-800 whitespace-nowrap"
+                  className="bg-indigo-600 hover:bg-indigo-700"
                 >
                   Add
-                </button>
+                </Button>
               </div>
             </div>
             <div className="p-5">
@@ -374,13 +378,14 @@ const Profile = () => {
                 Select areas where you can provide the most value to entrepreneurs.
               </p>
               
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-3">
                 {user?.mentorshipAreas?.map((area, index) => (
-                  <span key={index} className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm flex items-center">
+                  <span key={index} className="bg-gradient-to-r from-slate-50 to-slate-100 text-slate-700 px-4 py-2 rounded-md text-sm flex items-center border border-slate-200 shadow-sm hover:shadow transition-all duration-200">
                     {area}
                     <button 
-                      className="ml-1.5 text-blue-600 hover:text-blue-800 focus:outline-none"
+                      className="ml-2 text-slate-400 hover:text-red-500 focus:outline-none"
                       onClick={() => handleRemoveExpertise(area)}
+                      title="Remove expertise"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -393,23 +398,6 @@ const Profile = () => {
                 )}
               </div>
               
-              <div className="mt-5">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Suggested Expertise Areas
-                </label>
-                <div className="flex flex-wrap gap-2 mt-2">
-                  {['Product Strategy', 'Fundraising', 'Marketing', 'Sales', 'Operations', 'Tech Development', 
-                    'Team Building', 'Financial Modeling', 'Market Research', 'Business Development'].map((area, idx) => (
-                    <button 
-                      key={idx}
-                      onClick={() => handleAddExpertise(area)}
-                      className="bg-gray-100 hover:bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-sm"
-                    >
-                      + {area}
-                    </button>
-                  ))}
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -423,21 +411,23 @@ const Profile = () => {
             <div className="p-5 text-center">
               <div className="mb-5 flex justify-center">
                 <div className="relative">
-                  <img
-                    src={photoPreview || user?.profileDetails?.profilePhoto || "/avatar-placeholder.png"}
-                    alt="Profile"
-                    className="h-32 w-32 rounded-full object-cover border-4 border-white shadow"
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = "/avatar-placeholder.png";
-                    }}
-                  />
+                  <div className="h-32 w-32 rounded-full p-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 shadow-xl">
+                    <img
+                      src={photoPreview || user?.profileDetails?.profilePhoto || "/avatar-placeholder.png"}
+                      alt="Profile"
+                      className="h-full w-full rounded-full object-cover border-2 border-white"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = "/avatar-placeholder.png";
+                      }}
+                    />
+                  </div>
                   <button 
                     type="button"
                     onClick={() => fileInputRef.current.click()}
-                    className="absolute bottom-0 right-0 bg-blue-600 text-white p-1.5 rounded-full shadow-md hover:bg-blue-700"
+                    className="absolute bottom-0 right-0 bg-white p-1.5 rounded-full shadow-lg hover:shadow-xl border-2 border-indigo-500 transition-all duration-300 group"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-indigo-600 group-hover:text-indigo-800 transition-colors" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
                     </svg>
                   </button>
@@ -452,17 +442,19 @@ const Profile = () => {
                 accept="image/*"
                 onChange={handlePhotoChange}
               />
-              <button
-                type="button"
+              <Button
+                variant="outline"
+                size="md"
                 onClick={() => fileInputRef.current.click()}
-                className="mt-4 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none"
+                className="mt-4"
               >
                 Upload New Photo
-              </button>
+              </Button>
               {profilePhoto && (
                 <div className="mt-2">
-                  <button
-                    type="button"
+                  <Button 
+                    variant="primary"
+                    size="sm"
                     onClick={async () => {
                       try {
                         setSaving(true);
@@ -492,11 +484,10 @@ const Profile = () => {
                         setSaving(false);
                       }
                     }}
-                    className="ml-2 inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
                     disabled={saving}
                   >
                     {saving ? 'Uploading...' : 'Save Photo'}
-                  </button>
+                  </Button>
                 </div>
               )}
             </div>
@@ -516,7 +507,7 @@ const Profile = () => {
                   <div className="ml-4 flex-shrink-0">
                     <button 
                       type="button" 
-                      className={`${profileSettings.visibility ? 'bg-green-500' : 'bg-gray-200'} relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2`}
+                      className={`${profileSettings.visibility ? 'bg-indigo-500' : 'bg-slate-200'} relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2`}
                       role="switch" 
                       aria-checked={profileSettings.visibility}
                       onClick={() => {
@@ -572,7 +563,7 @@ const Profile = () => {
                     <p className="text-xs text-gray-500">Set whether you're accepting new mentees</p>
                   </div>
                   <select 
-                    className="block pl-3 pr-9 py-1 text-sm border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-md"
+                    className="block pl-3 pr-9 py-1 text-sm border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-md text-gray-800"
                     value={profileSettings.availabilityStatus}
                     onChange={(e) => {
                       const newSettings = {
@@ -598,17 +589,22 @@ const Profile = () => {
             </div>
             <div className="p-5 text-center">
               <p className="text-sm text-gray-600 mb-4">See how your profile appears to entrepreneurs</p>
-              <Link 
+              <Button
+                variant="outline"
+                size="md"
+                as={Link}
                 to={`/mentor/${user?._id}`}
-                className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
                 target="_blank"
+                className="border-slate-200 hover:border-slate-300 text-indigo-600 hover:text-indigo-800 hover:bg-slate-50"
+                icon={
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                }
               >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                </svg>
                 View Public Profile
-              </Link>
+              </Button>
             </div>
           </div>
         </div>

@@ -15,7 +15,7 @@ import NavBar from './components/NavBar';
 import StartupSearch from './components/StartupSearch';
 import NotificationCenter from './components/NotificationCenter';
 import Settings from './components/Settings';
-import HomePage from './components/HomePage';
+import HomePage from './components/homepage';
 import { UserProvider } from './UserContext';
 
 const ProtectedRoute = ({ children }) => {

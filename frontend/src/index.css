@@ -4,6 +4,37 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Dark mode variables */
+:root {
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f9fafb;
+  --color-bg-card: #ffffff;
+  --color-text-primary: #111827;
+  --color-text-secondary: #4b5563;
+  --color-border: #e5e7eb;
+  --color-input-bg: #ffffff;
+  --color-sidebar-bg: linear-gradient(to bottom, #1f2937, #111827);
+  --color-sidebar-text: #f3f4f6;
+}
+
+.dark-mode {
+  --color-bg-primary: #111827;
+  --color-bg-secondary: #1f2937;
+  --color-bg-card: #1f2937;
+  --color-text-primary: #f9fafb;
+  --color-text-secondary: #d1d5db;
+  --color-border: #374151;
+  --color-input-bg: #374151;
+  --color-sidebar-bg: linear-gradient(to bottom, #0f172a, #020617);
+  --color-sidebar-text: #f3f4f6;
+}
+
+/* Apply variables to general elements */
+body {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+}
+
 @layer base {
   body {
     @apply font-sans text-base text-gray-100 bg-background;

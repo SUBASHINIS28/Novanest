@@ -459,7 +459,6 @@ const Profile = () => {
                       try {
                         setSaving(true);
                         
-                        // Create form data
                         const formData = new FormData();
                         formData.append('profilePhoto', profilePhoto);
                         
@@ -479,7 +478,11 @@ const Profile = () => {
                         setTimeout(() => setSaveSuccess(false), 3000);
                       } catch (error) {
                         console.error('Error uploading photo:', error);
-                        setSaveError('Failed to upload photo. Please try again.');
+                        // Fix error message extraction
+                        const errorMessage = error.response?.data || 
+                                             (typeof error.message === 'string' ? error.message : 
+                                             'Failed to upload photo. Please try again.');
+                        setSaveError(errorMessage);
                       } finally {
                         setSaving(false);
                       }

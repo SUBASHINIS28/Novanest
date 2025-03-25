@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { UserContext } from '../../UserContext';
+import { ThemeContext } from '../../ThemeContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import Sidebar from './Sidebar';
 import Overview from './Overview';
@@ -12,6 +13,7 @@ import MeetingModal from './modals/MeetingModal';
 
 const MentorDashboard = () => {
   const { user, loading } = useContext(UserContext);
+  const { theme } = useContext(ThemeContext);
   const [activeTab, setActiveTab] = useState('overview');
   const [showMeetingModal, setShowMeetingModal] = useState(false);
   const [activeMeeting, setActiveMeeting] = useState(null);
@@ -158,13 +160,13 @@ const MentorDashboard = () => {
   }
 
   return (
-    <div className="flex h-screen bg-slate-50">
+    <div className={`flex h-screen bg-slate-50 dark:bg-gray-900 ${theme === 'dark' ? 'dark' : ''}`}>
       <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} user={user} />
       <div className="flex-1 flex flex-col overflow-hidden">
-        <header className="bg-white border-b border-slate-200 shadow-sm">
+        <header className="bg-white dark:bg-gray-800 border-b border-slate-200 dark:border-gray-700 shadow-sm">
           {/* ... header content ... */}
         </header>
-        <main className="flex-1 overflow-y-auto bg-gradient-to-br from-slate-50 to-slate-100 p-6">
+        <main className="flex-1 overflow-y-auto bg-gradient-to-br from-slate-50 to-slate-100 dark:from-gray-900 dark:to-gray-800 p-6">
           <div className="max-w-7xl mx-auto">
             {/* User welcome section */}
             <motion.div 
@@ -174,16 +176,16 @@ const MentorDashboard = () => {
               animate="visible"
             >
               <motion.h1 
-                className="text-3xl font-bold text-gray-900"
+                className="text-3xl font-bold text-gray-900 dark:text-gray-100"
                 variants={{
                   hidden: { opacity: 0, y: -10 },
                   visible: { opacity: 1, y: 0 }
                 }}
               >
-                Welcome back, <span className="text-blue-600">{user?.name?.split(' ')[0] || 'Mentor'}</span>
+                Welcome back, <span className="text-blue-600 dark:text-blue-400">{user?.name?.split(' ')[0] || 'Mentor'}</span>
               </motion.h1>
               <motion.p 
-                className="text-gray-500 mt-2"
+                className="text-gray-500 dark:text-gray-400 mt-2"
                 variants={{
                   hidden: { opacity: 0, y: 10 },
                   visible: { opacity: 1, y: 0 }

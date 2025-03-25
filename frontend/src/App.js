@@ -17,6 +17,7 @@ import NotificationCenter from './components/NotificationCenter';
 import Settings from './components/Settings';
 import HomePage from './components/homepage';
 import { UserProvider } from './UserContext';
+import { ThemeProvider } from './ThemeContext';
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem('token');
@@ -42,49 +43,51 @@ const MainLayout = ({ children }) => (
 
 function App() {
   return (
-    <UserProvider>
-      <Router>
-        <Routes>
-          {/* Set HomePage as the root route */}
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Signup />} />
-          
-          {/* Protected Routes */}
-          <Route path="/profile" element={
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          } />
-          <Route path="/startup/:id" element={<MainLayout><StartupProfile /></MainLayout>} />
-          <Route path="/entrepreneur-dashboard" element={<MainLayout><EntrepreneurDashboard /></MainLayout>} />
-          <Route path="/investor-dashboard" element={<MainLayout><InvestorDashboard /></MainLayout>} />
-          <Route path="/mentor-dashboard" element={<MainLayout><MentorDashboard /></MainLayout>} />
-          <Route path="/mentor/:id" element={<MainLayout><MentorProfile /></MainLayout>} />
-          <Route path="/entrepreneur/:id" element={<MainLayout><EntrepreneurProfile /></MainLayout>} />
-          <Route path="/pitchdeck" element={<MainLayout><PitchDeck /></MainLayout>} />
-          <Route path="/messages" element={<MainLayout><Messages /></MainLayout>} />
-          <Route path="/startups/search" element={
-            <ProtectedRoute>
-              <StartupSearch />
-            </ProtectedRoute>
-          } />
-          <Route path="/notifications" element={
-            <ProtectedRoute>
-              <NotificationCenter />
-            </ProtectedRoute>
-          } />
-          <Route path="/settings" element={
-            <ProtectedRoute>
-              <Settings />
-            </ProtectedRoute>
-          } />
-          
-          {/* Change fallback route to home page */}
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
-      </Router>
-    </UserProvider>
+    <ThemeProvider>
+      <UserProvider>
+        <Router>
+          <Routes>
+            {/* Set HomePage as the root route */}
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Signup />} />
+            
+            {/* Protected Routes */}
+            <Route path="/profile" element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            } />
+            <Route path="/startup/:id" element={<MainLayout><StartupProfile /></MainLayout>} />
+            <Route path="/entrepreneur-dashboard" element={<MainLayout><EntrepreneurDashboard /></MainLayout>} />
+            <Route path="/investor-dashboard" element={<MainLayout><InvestorDashboard /></MainLayout>} />
+            <Route path="/mentor-dashboard" element={<MainLayout><MentorDashboard /></MainLayout>} />
+            <Route path="/mentor/:id" element={<MainLayout><MentorProfile /></MainLayout>} />
+            <Route path="/entrepreneur/:id" element={<MainLayout><EntrepreneurProfile /></MainLayout>} />
+            <Route path="/pitchdeck" element={<MainLayout><PitchDeck /></MainLayout>} />
+            <Route path="/messages" element={<MainLayout><Messages /></MainLayout>} />
+            <Route path="/startups/search" element={
+              <ProtectedRoute>
+                <StartupSearch />
+              </ProtectedRoute>
+            } />
+            <Route path="/notifications" element={
+              <ProtectedRoute>
+                <NotificationCenter />
+              </ProtectedRoute>
+            } />
+            <Route path="/settings" element={
+              <ProtectedRoute>
+                <Settings />
+              </ProtectedRoute>
+            } />
+            
+            {/* Change fallback route to home page */}
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </Router>
+      </UserProvider>
+    </ThemeProvider>
   );
 }
 

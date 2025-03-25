@@ -747,18 +747,24 @@ app.get('/api/entrepreneurs/:id/startups', authMiddleware, async (req, res) => {
       return res.status(400).json({ message: "Invalid user ID" });
     }
     
-    // Ensure consistent ID format by converting both to strings for comparison
-    // Add protection so users can only see their own startups (optional security)
-    // const isOwnStartups = userId.toString() === authUserId.toString();
-    // if (!isOwnStartups) {
-    //   return res.status(403).json({ message: "Unauthorized" });
-    // }
-    
-    // Find startups with proper ID conversion if needed
     const startups = await Startup.find({ founderId: userId });
     console.log(`Found ${startups.length} startups for user ${userId}`);
     
     res.status(200).json(startups);
+  } catch (error) {
+    console.error('Error fetching startups:', error);
+    res.status(500).send('Server error');
+  }
+});
+
+// Add this near your other startup-related API endpoints (around line 700-750)
+
+app.get('/api/startups/entrepreneur/:id', authMiddleware, async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const startups = await Startup.find({ founderId: userId });
+    // Always return an array, even if empty
+    res.status(200).json(startups || []);
   } catch (error) {
     console.error('Error fetching startups:', error);
     res.status(500).send('Server error');
@@ -986,15 +992,25 @@ app.put('/api/users/:id/expertise', authMiddleware, async (req, res) => {
       return res.status(400).send('No expertise areas provided');
     }
     
-    // Convert comma-separated string to array and clean it
-    const expertiseAreasArray = expertiseAreas
-      .split(',')
-      .map(area => area.trim())
-      .filter(area => area.length > 0);
+    // Handle both string and array inputs for expertise areas
+    let expertiseAreasArray = [];
+    if (Array.isArray(expertiseAreas)) {
+      // If already an array, use it directly
+      expertiseAreasArray = expertiseAreas.filter(area => typeof area === 'string' && area.trim().length > 0);
+    } else if (typeof expertiseAreas === 'string') {
+      // If a string, split by commas
+      expertiseAreasArray = expertiseAreas
+        .split(',')
+        .map(area => area.trim())
+        .filter(area => area.length > 0);
+    } else {
+      // If neither array nor string, use empty array
+      console.warn('Unexpected expertiseAreas format:', typeof expertiseAreas);
+    }
 
     // Update user in database with expertise areas
     const updatedUser = await User.findByIdAndUpdate(
-      tokenUserId, // Use token ID directly instead of URL parameter
+      tokenUserId,
       { $set: { expertiseAreas: expertiseAreasArray } },
       { new: true }
     ).select('-password');

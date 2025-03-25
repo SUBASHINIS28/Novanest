@@ -156,7 +156,11 @@ const ProfileEditForm = ({ user, onClose, onUpdate }) => {
         alert('Your session has expired. Please login again.');
         window.location.href = '/login';
       } else {
-        alert(`Error updating profile: ${error.response?.data || error.message || 'Unknown error'}`);
+        // Fix error message extraction
+        const errorMsg = error.response?.data || 
+                        (typeof error.message === 'string' ? error.message : 
+                        'Unknown error occurred');
+        alert(`Error updating profile: ${errorMsg}`);
       }
     }
   };

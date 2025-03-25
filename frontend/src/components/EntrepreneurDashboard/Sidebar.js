@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import ThemeToggle from '../common/ThemeToggle';
 import { ThemeContext } from '../../ThemeContext';
+import ThemeToggle from '../common/ThemeToggle';
 
 const Sidebar = ({ activeTab, setActiveTab, user }) => {
   const [collapsed, setCollapsed] = useState(false);
@@ -9,7 +9,7 @@ const Sidebar = ({ activeTab, setActiveTab, user }) => {
   
   const navigation = [
     {
-      name: 'Overview',
+      name: 'Dashboard',
       id: 'overview',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -18,8 +18,17 @@ const Sidebar = ({ activeTab, setActiveTab, user }) => {
       ),
     },
     {
-      name: 'Active Mentees',
-      id: 'mentees',
+      name: 'My Startups',
+      id: 'startups',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+        </svg>
+      ),
+    },
+    {
+      name: 'Find Mentors',
+      id: 'mentors',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
           <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
@@ -27,29 +36,21 @@ const Sidebar = ({ activeTab, setActiveTab, user }) => {
       ),
     },
     {
-      name: 'Mentorship Requests',
-      id: 'requests',
+      name: 'Mentorships',
+      id: 'mentorships',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z" clipRule="evenodd" />
+          <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z" />
+          <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z" />
         </svg>
       ),
     },
     {
-      name: 'Office Hours',
-      id: 'office-hours',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
-        </svg>
-      ),
-    },
-    {
-      name: 'Profile Settings',
+      name: 'Profile',
       id: 'profile',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
+          <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
         </svg>
       ),
     },
@@ -58,28 +59,28 @@ const Sidebar = ({ activeTab, setActiveTab, user }) => {
   return (
     <div className={`bg-gradient-to-b ${
       theme === 'dark' 
-        ? 'from-gray-900 to-black' 
+        ? 'from-gray-900 via-gray-800 to-slate-900' 
         : 'from-slate-800 to-slate-900'
     } shadow-xl h-full transition-all duration-300 ease-in-out flex flex-col relative overflow-hidden`}>
-      {/* Add elite accent line */}
+      {/* Add subtle accent line */}
       <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${
         theme === 'dark'
-          ? 'from-blue-400/80 to-purple-400/80'
-          : 'from-indigo-400/80 to-purple-400/80'
+          ? 'from-amber-500/30 to-slate-500/30'
+          : 'from-amber-500/40 to-slate-400/40'
       }`}></div>
       
       {/* Header with logo */}
       <div className="flex items-center justify-between h-20 px-6 border-b border-gray-700">
         {!collapsed && (
           <div className="flex items-center gap-3">
-            <div className="bg-gradient-to-r from-amber-500 to-amber-600 text-white p-2 rounded-lg shadow-md">
+            <div className="bg-gradient-to-r from-gray-800 to-gray-700 text-amber-500 p-2 rounded-lg shadow-md border border-gray-600">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+                <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z" />
               </svg>
             </div>
             <div>
               <span className="font-bold text-white text-lg tracking-tight">Novanest</span>
-              <p className="text-xs text-gray-400">Mentor Dashboard</p>
+              <p className="text-xs text-gray-400">Entrepreneur Dashboard</p>
             </div>
           </div>
         )}
@@ -103,11 +104,11 @@ const Sidebar = ({ activeTab, setActiveTab, user }) => {
       <div className="py-6 flex flex-col flex-grow">
         {collapsed ? (
           <div className="flex flex-col items-center mb-8">
-            <div className="h-12 w-12 rounded-full bg-gradient-to-r from-amber-500 to-purple-500 p-0.5">
+            <div className="h-12 w-12 rounded-full bg-gradient-to-r from-gray-600 to-gray-700 p-0.5">
               <div className="rounded-full w-full h-full overflow-hidden border-2 border-gray-800">
                 <img
                   src={user?.profileDetails?.profilePhoto || "/avatar-placeholder.png"}
-                  alt={user?.name || "Mentor"}
+                  alt={user?.name || "Entrepreneur"}
                   className="h-full w-full object-cover"
                   onError={(e) => {
                     e.target.onerror = null;
@@ -121,11 +122,11 @@ const Sidebar = ({ activeTab, setActiveTab, user }) => {
           <div className="px-6 mb-8">
             <div className="flex items-center p-3 bg-gray-800 rounded-xl shadow-md">
               <div className="relative">
-                <div className="h-14 w-14 rounded-full bg-gradient-to-r from-amber-500 to-purple-500 p-0.5 shadow-lg">
+                <div className="h-14 w-14 rounded-full bg-gradient-to-r from-gray-700 to-gray-600 p-0.5 shadow-lg">
                   <div className="rounded-full w-full h-full overflow-hidden border-2 border-gray-700">
                     <img
                       src={user?.profileDetails?.profilePhoto || "/avatar-placeholder.png"}
-                      alt={user?.name || "Mentor"}
+                      alt={user?.name || "Entrepreneur"}
                       className="h-full w-full object-cover"
                       onError={(e) => {
                         e.target.onerror = null;
@@ -137,10 +138,10 @@ const Sidebar = ({ activeTab, setActiveTab, user }) => {
                 <span className="absolute bottom-0 right-1 block h-3 w-3 rounded-full bg-green-400 border-2 border-gray-700"></span>
               </div>
               <div className="ml-3">
-                <p className="text-sm font-medium text-gray-200">{user?.name || "Mentor"}</p>
+                <p className="text-sm font-medium text-gray-200">{user?.name || "Entrepreneur"}</p>
                 <div className="flex items-center">
-                  <span className="bg-amber-900/30 text-amber-400 text-xs px-2 py-0.5 rounded-full border border-amber-700/50">
-                    Mentor
+                  <span className="bg-gray-700/70 text-amber-400 text-xs px-2 py-0.5 rounded-full border border-gray-600">
+                    Entrepreneur
                   </span>
                   <div className="w-2 h-2 rounded-full bg-green-500 ml-2"></div>
                 </div>
@@ -172,7 +173,7 @@ const Sidebar = ({ activeTab, setActiveTab, user }) => {
         </nav>
       </div>
       
-      {/* Footer with sign out */}
+      {/* Footer with theme toggle and sign out */}
       <div className="border-t border-gray-700 p-4">
         <div className="flex justify-center mb-4">
           <ThemeToggle />

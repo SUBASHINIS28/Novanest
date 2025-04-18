@@ -138,7 +138,7 @@ Copy
 
 Edit
 
-git clone https://github.com/your-repo/novanest.git
+git clone https://github.com/NandaKishore2424/novanest.git
 
 cd novanest
 
